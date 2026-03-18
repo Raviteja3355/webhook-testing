@@ -3,15 +3,15 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                sh 'mvn clean install'
+                sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Run') {
             steps {
-                sh 'java -jar target/app.jar'
+                sh 'nohup python app.py &'
             }
         }
     }
