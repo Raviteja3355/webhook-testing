@@ -3,15 +3,23 @@ pipeline {
 
     stages {
 
-        stage('Install Dependencies') {
+        stage('Setup Python Environment') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh '''
+                python3 -m venv venv
+                . venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
             }
         }
 
-        stage('Run') {
+        stage('Run App') {
             steps {
-                sh 'nohup python app.py &'
+                sh '''
+                . venv/bin/activate
+                nohup python app.py > app.log 2>&1 &
+                '''
             }
         }
     }
