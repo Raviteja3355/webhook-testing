@@ -1,10 +1,10 @@
-from flask import Flask, jsonify
-
+from flask import Flask
 app = Flask(__name__)
 
-@app.route('/api')
-def api():
-    return jsonify({"message": "Hello from Flask backend!"})
+@app.route('/')
+def hello():
+    return "Hello World!"
 
+# Bind to 0.0.0.0 to make it accessible externally
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
